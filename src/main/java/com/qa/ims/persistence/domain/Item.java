@@ -17,6 +17,10 @@ public class Item {
 		this.setPrice(price);
 	}
 	
+	public Item(Long id) {
+		this.setId(id);
+	}
+	
 	public Long getId() {
 		return id;
 	}
@@ -24,6 +28,7 @@ public class Item {
 	public void setId(Long id) {
 		this.id = id;
 	}
+	
 	
 	public String getItemName() {
 		return itemName;
