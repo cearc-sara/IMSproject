@@ -33,6 +33,8 @@ public class OrdersDAO implements Dao<Orders> {
 			List<Orders> order = new ArrayList<Orders>();
 
 			do {
+				
+				resultSet.next();
 				orders = modelFromResultSet(resultSet);
 				order.add(orders);
 			} while (resultSet.next());
@@ -91,10 +93,10 @@ public class OrdersDAO implements Dao<Orders> {
 				statement.executeUpdate();
 				
 				Orders lastOrder = readLatest();
-				statement = connection.prepareStatement("INSERT INTO item_order(order_id, item_id "
-						+ "VALUES(?, ?");
-				statement.setLong(1, lastOrder.getOrderId());
-				statement.setLong(2, order.getItemId());
+				statement = connection.prepareStatement("INSERT INTO item_order(item_id, order_id) "
+						+ "VALUES(?, ?)");
+				statement.setLong(2, lastOrder.getOrderId());
+				statement.setLong(1, order.getItemId());
 				statement.executeUpdate();
 				
 				return lastOrder;
